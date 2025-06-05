@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card mb-4">
+    <div class="card-body">
+        <form id="weather-form" class="row g-3">
+            <div class="col-md-4">
+                <input type="text" class="form-control" id="city" list="city-list" placeholder="Enter city name"
+                    autocomplete="off">
+                <datalist id="city-list"></datalist>
+
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="lat" placeholder="Latitude" step="any">
+            </div>
+            <div class="col-md-2">
+                <input type="number" class="form-control" id="lon" placeholder="Longitude" step="any">
+            </div>
+            <div class="col-md-2">
+                <select class="form-select" id="units">
+                    <option value="celsius">Celsius</option>
+                    <option value="fahrenheit">Fahrenheit</option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <button class="btn btn-primary w-100" type="submit">Get Weather</button>
+            </div>
+        </form>
+        <div class="form-check form-switch mt-3">
+            <input class="form-check-input" type="checkbox" id="forecast-type">
+            <label class="form-check-label" for="forecast-type">Daily Forecast</label>
+        </div>
+    </div>
+</div>
+<div id="weather-dashboard"></div>
+<div id="error-message" class="alert alert-danger d-none"></div>
+{% endblock %} -->

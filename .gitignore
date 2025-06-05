@@ -1,0 +1,2 @@
+__pycache__/\n*.pyc\n.env\n*.sqlite3\n.DS_Store
+venv/

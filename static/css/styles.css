@@ -1,0 +1,11 @@
+body {
+  transition: background-color 0.3s, color 0.3s;
+}
+[data-bs-theme="dark"] {
+  background-color: #181a1b;
+  color: #f8f9fa;
+}
+[data-bs-theme="dark"] .card {
+  background-color: #23272b;
+  color: #f8f9fa;
+}
