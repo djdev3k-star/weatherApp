@@ -7,7 +7,6 @@
                 <input type="text" class="form-control" id="city" list="city-list" placeholder="Enter city name"
                     autocomplete="off">
                 <datalist id="city-list"></datalist>
-
             </div>
             <div class="col-md-2">
                 <input type="number" class="form-control" id="lat" placeholder="Latitude" step="any">
@@ -31,6 +30,14 @@
         </div>
     </div>
 </div>
-<div id="weather-dashboard"></div>
+
+<!-- Weather results -->
+<div class="card mb-4">
+    <div class="card-body">
+        <div id="weather-dashboard"></div>
+    </div>
+</div>
+
+<!-- Error message -->
 <div id="error-message" class="alert alert-danger d-none"></div>
-{% endblock %} -->
+{% endblock %}
