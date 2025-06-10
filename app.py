@@ -1,16 +1,15 @@
-
 import os
 import requests
 from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
+from functools import lru_cache
 
 load_dotenv()
 
 app = Flask(__name__)
 
-OPEN_METEO_BASE = os.getenv("OPEN_METEO_BASE", "https://api.open-meteo.com/v1/forecast")
-GEOCODING_API = os.getenv("GEOCODING_API", "https://geocoding-api.open-meteo.com/v1/search")
-
+OPEN_METEO_BASE = os.getenv("OPEN_METEO_BASE")
+GEOCODING_API = os.getenv("GEOCODING_API")
 def get_coords(city):
     """
     Return the coordinates for a given city name.
@@ -60,6 +59,16 @@ def fetch_weather(lat, lon, units, forecast_type):
     resp.raise_for_status()
     return resp.json()
 
+@lru_cache(maxsize=128)
+def cached_fetch_weather(lat, lon, units, forecast_type):
+    """
+    Cached wrapper for fetch_weather.
+    Only accepts hashable arguments.
+    """
+    # lru_cache only works with hashable types (float, str, etc.)
+    # Convert lat/lon to float to ensure hashability and consistency
+    return fetch_weather(float(lat), float(lon), units, forecast_type)
+
 @app.route("/", methods=["GET"])
 def index():
     """
@@ -107,11 +116,11 @@ def api_weather():
             except (TypeError, ValueError):
                 return jsonify({"error": "Latitude and longitude must be valid numbers"}), 400
             city_found, country = "Coordinates", ""
-
         else:
             return jsonify({"error": "No location provided"}), 400
 
-        weather = fetch_weather(lat, lon, units, forecast_type)
+        # Use the cached version of fetch_weather
+        weather = cached_fetch_weather(lat, lon, units, forecast_type)
         return jsonify({
             "location": f"{city_found}, {country}".strip(", "),
             "units": units,

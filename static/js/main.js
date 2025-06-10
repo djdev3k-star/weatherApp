@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", function () {
         const d = new Date(dtString);
         return d.toLocaleString(undefined, {
             weekday: "short",
-            year: "numeric",
+          //  year: "numeric",
             month: "short",
             day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit"
+        //    hour: "2-digit",
+        //    minute: "2-digit"
         });
     }
 
@@ -88,17 +88,17 @@ document.addEventListener("DOMContentLoaded", function () {
             if (forecast.temperature_2m_max) html += `<th>Max Temp</th>`;
             if (forecast.temperature_2m_min) html += `<th>Min Temp</th>`;
             if (forecast.wind_speed_10m) html += `<th>Wind</th>`;
-            if (forecast.wind_speed_10m_max) html += `<th>Max Wind</th>`;
+           // if (forecast.wind_speed_10m_max) html += `<th>Max Wind</th>`;
             if (forecast.wind_direction_10m) html += `<th>Wind Dir</th>`;
-            if (forecast.wind_direction_10m_dominant) html += `<th>Dom Wind Dir</th>`;
+          //  if (forecast.wind_direction_10m_dominant) html += `<th>Dom Wind Dir</th>`;
             if (forecast.precipitation) html += `<th>Precipitation</th>`;
-            if (forecast.precipitation_sum) html += `<th>Precip Sum</th>`;
+           // if (forecast.precipitation_sum) html += `<th>Precip Sum</th>`;
             if (forecast.precipitation_probability) html += `<th>Precip Prob</th>`;
-            if (forecast.precipitation_probability_max) html += `<th>Max Precip Prob</th>`;
+          //  if (forecast.precipitation_probability_max) html += `<th>Max Precip Prob</th>`;
             if (forecast.relative_humidity_2m) html += `<th>Humidity</th>`;
-            if (forecast.relative_humidity_2m_max) html += `<th>Max Humidity</th>`;
+         //   if (forecast.relative_humidity_2m_max) html += `<th>Max Humidity</th>`;
             if (forecast.uv_index) html += `<th>UV Index</th>`;
-            if (forecast.uv_index_max) html += `<th>Max UV</th>`;
+        //    if (forecast.uv_index_max) html += `<th>Max UV</th>`;
             html += `</tr></thead><tbody>`;
 
             for (let i = 0; i < forecast.time.length; i++) {
@@ -117,24 +117,30 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (forecast.temperature_2m_max) html += `<td>${forecast.temperature_2m_max[i]}</td>`;
                 if (forecast.temperature_2m_min) html += `<td>${forecast.temperature_2m_min[i]}</td>`;
                 if (forecast.wind_speed_10m) html += `<td>${forecast.wind_speed_10m[i]}</td>`;
-                if (forecast.wind_speed_10m_max) html += `<td>${forecast.wind_speed_10m_max[i]}</td>`;
+            //    if (forecast.wind_speed_10m_max) html += `<td>${forecast.wind_speed_10m_max[i]}</td>`;
                 if (forecast.wind_direction_10m) html += `<td>${forecast.wind_direction_10m[i]}</td>`;
-                if (forecast.wind_direction_10m_dominant) html += `<td>${forecast.wind_direction_10m_dominant[i]}</td>`;
+            //    if (forecast.wind_direction_10m_dominant) html += `<td>${forecast.wind_direction_10m_dominant[i]}</td>`;
                 if (forecast.precipitation) html += `<td>${forecast.precipitation[i]}</td>`;
-                if (forecast.precipitation_sum) html += `<td>${forecast.precipitation_sum[i]}</td>`;
+            //    if (forecast.precipitation_sum) html += `<td>${forecast.precipitation_sum[i]}</td>`;
                 if (forecast.precipitation_probability) html += `<td>${forecast.precipitation_probability[i] ?? "-"}</td>`;
-                if (forecast.precipitation_probability_max) html += `<td>${forecast.precipitation_probability_max[i] ?? "-"}</td>`;
+            //    if (forecast.precipitation_probability_max) html += `<td>${forecast.precipitation_probability_max[i] ?? "-"}</td>`;
                 if (forecast.relative_humidity_2m) html += `<td>${forecast.relative_humidity_2m[i]}</td>`;
-                if (forecast.relative_humidity_2m_max) html += `<td>${forecast.relative_humidity_2m_max[i]}</td>`;
+            //    if (forecast.relative_humidity_2m_max) html += `<td>${forecast.relative_humidity_2m_max[i]}</td>`;
                 if (forecast.uv_index) html += `<td>${forecast.uv_index[i]}</td>`;
-                if (forecast.uv_index_max) html += `<td>${forecast.uv_index_max[i]}</td>`;
+            //    if (forecast.uv_index_max) html += `<td>${forecast.uv_index_max[i]}</td>`;
                 html += `</tr>`;
             }
             html += `</tbody></table></div>`;
         }
 
-        dashboard.innerHTML = html;
-    }
+
+            const container = document.getElementById("weather-dashboard-container");
+            container.classList.remove("d-none");
+            // Clear previous content and show dashboard
+            dashboard.classList.remove("d-none");
+            // Render the HTML
+            dashboard.innerHTML = html;
+        }
 
     // Load defaults from sessionStorage
     const defaultLocation = sessionStorage.getItem("defaultLocation");
@@ -174,6 +180,8 @@ document.addEventListener("DOMContentLoaded", function () {
         } catch (err) {
             errorDiv.textContent = err.message;
             errorDiv.classList.remove("d-none");
+
+
         }
     };
 

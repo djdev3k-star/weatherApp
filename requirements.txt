@@ -1,3 +1,13 @@
+# Web framework
 Flask
+
+# HTTP requests
 requests
+
+# Environment variable management
 python-dotenv
+
+# Rate limiting for Flask (security best practice)
+Flask-Limiter
+
+# Optional: For production-grade WSGI server (recommended for deployment)
