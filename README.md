@@ -27,6 +27,13 @@ Open your browser and navigate to `http://localhost:5000`.
 
 ---
 
+### Search for a City
+![City Search](images/search.png)
+
+### Weather Results Display
+![Weather Results](images/results.png)
+
+
 ## Example Output
 
 **Sample API Request:**
